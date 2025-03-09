@@ -8,7 +8,7 @@ export default abstract class AbstractProduct {
     protected price: number;
     protected state: boolean;
     protected stock: number;
-    protected image: AbstractImage[];
+    protected image: AbstractImage;
     protected category: AbstractCategory;
 
     constructor (productInterface: ProductInterface){
@@ -35,7 +35,7 @@ export default abstract class AbstractProduct {
     
     public getStock = (): number => this.stock;
     
-    public getImage = (): AbstractImage[] => this.image;
+    public getImage = (): AbstractImage => this.image;
 
     public getCategory = (): AbstractCategory => this.category;
 }
@@ -47,7 +47,7 @@ interface ProductInterface {
     price: number;
     state: boolean;
     stock: number;
-    image: AbstractImage[];
+    image: AbstractImage;
     category: AbstractCategory;
     // ??
     // pricePerUnit: number;

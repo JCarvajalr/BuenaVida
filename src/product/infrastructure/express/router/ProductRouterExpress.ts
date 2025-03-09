@@ -17,6 +17,6 @@ export default class ProductRouterExpress implements ProductRouterExpressInterfa
     }
 
     public getProducts(): void {
-        this.router.get("/products", this.productController.getProducts.bind(this.productController));
+        this.router.get("/getall", this.productController.getProducts.bind(this.productController));
     }
 }

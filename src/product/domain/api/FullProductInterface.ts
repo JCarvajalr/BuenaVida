@@ -8,6 +8,6 @@ export default interface FullProductInterface {
     price: number;
     state: boolean;
     stock: number;
-    image: ImageInterface[];
+    image: ImageInterface;
     category: CategoryInterface;
 }

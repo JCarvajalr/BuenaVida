@@ -1,4 +1,4 @@
-import MySqlProductInterface from "../../../../mysql/domain/product/MySqlProductInterface";
+import MySqlProductInterface from "../../../../sql/domain/product/MySqlProductInterface";
 import Product from "../../../domain/product/Product";
 import GetterCategory from "./GetterCategory";
 import GetterImage from "./GetterImage";
@@ -28,9 +28,10 @@ export default class SqlToProduct {
             price: mySqlProduct.price,
             state: mySqlProduct.state,
             stock: mySqlProduct.stock,
-            image: this.getterImage.get(mySqlProduct),
+            image: this.getterImage.get(mySqlProduct.image),
             category: await this.getterCategory.get(mySqlProduct.Category_idCategory),
         });
+
         return Promise.resolve(product);
     }
 }

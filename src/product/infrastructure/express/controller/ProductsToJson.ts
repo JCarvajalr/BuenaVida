@@ -11,12 +11,10 @@ export default class ProductsToJson {
                 price: product.getPrice(),
                 state: product.getState(),
                 stock: product.getStock(),
-                image: product.getImage().map((image) => {
-                    return {
-                      name: image.getName(),
-                      path: image.getPath(),
-                    }
-                }),
+                image: {
+                    name: product.getImage().getName(),
+                    path: product.getImage().getPath(),
+                },
                 category: {
                     id: product.getCategory().getId(),
                     name: product.getCategory().getName(),

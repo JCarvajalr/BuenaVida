@@ -13,6 +13,6 @@ export default class MySqlCategoryAccesor implements MySqlCategoryAccesorInterfa
             description 
             FROM category WHERE idCategory = ?`, [id]
         );
-        return rows;
+        return rows[0];
     }
 }

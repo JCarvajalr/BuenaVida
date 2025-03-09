@@ -21,7 +21,7 @@ export default abstract class AbstractImage {
       this.path = path
     }
 }
-  
+
 interface ImageInterface {
     name: string,
     path: string

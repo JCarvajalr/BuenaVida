@@ -1,5 +1,5 @@
-import MySqlCategoryAccesor from "../../../mysql/infrastructure/db/productSql/MySqlCategoryAccesor";
-import MySqlProductAccesor from "../../../mysql/infrastructure/db/productSql/MySqlProductAccesor";
+import MySqlCategoryAccesor from "../../../sql/infrastructure/db/productSql/MySqlCategoryAccesor";
+import MySqlProductAccesor from "../../../sql/infrastructure/db/productSql/MySqlProductAccesor";
 import DbProductRepository from "../repository/DbProductRepository";
 import GetterCategory from "../repository/helpers/GetterCategory";
 import GetterImage from "../repository/helpers/GetterImage";

@@ -11,7 +11,7 @@ export default class NullProduct extends AbstractProduct {
             price: 0,
             state: false,
             stock: 0,
-            image: [],
+            image: new NullImage(),
             category: new NullCategory(),
         })
     }

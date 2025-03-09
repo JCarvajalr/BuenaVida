@@ -1,5 +1,5 @@
 
-import MySqlProductAccesorInterface from "../../../mysql/domain/repository/MySqlProductAccesorInterface";
+import MySqlProductAccesorInterface from "../../../sql/domain/repository/MySqlProductAccesorInterface";
 import DbProductRepositoryPort from "../../domain/port/driven/DbProductRepositoryPort";
 import NullProduct from "../../domain/product/NullProduct";
 import Product from "../../domain/product/Product";
@@ -13,11 +13,11 @@ export default class DbProductRepository implements DbProductRepositoryPort {
     
     public async findAll(): Promise<Product[]> {
         const sqlProducts = await this.sql.fetchAllProducts();
-
         if (!sqlProducts) {
             return [];
         }
-        return this.sqlToProduct.getArray(sqlProducts);
+        const products = await this.sqlToProduct.getArray(sqlProducts);
+        return Promise.resolve(products);
     }
 
     public async findById(id: string): Promise<Product> {
@@ -25,7 +25,8 @@ export default class DbProductRepository implements DbProductRepositoryPort {
         if (!sqlProduct) {
             return new NullProduct();
         }
-        return this.sqlToProduct.get(sqlProduct);
+        const product = this.sqlToProduct.get(sqlProduct);
+        return Promise.resolve(product);
     }
     
     public save = (item: Product): Promise<Product> => Promise.resolve(new NullProduct());

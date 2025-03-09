@@ -7,5 +7,5 @@ export default interface MySqlProductInterface {
     state: boolean;
     stock: number;
     Category_idCategory: number;
-    image: string[];
+    image: string;
 }

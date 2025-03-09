@@ -17,7 +17,6 @@ export default abstract class AbstractCategory {
     public getName = (): string => this.name;
 
     public getDescription = (): string => this.description;
-
 }
 
 interface CategoryInterface {
