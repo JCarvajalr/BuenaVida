@@ -10,7 +10,7 @@ export default class ExpressProvider {
         ExpressProvider.PORT = process.env['PORT'] ?? '3000';
         ExpressProvider.PROTOCOL = process.env['PROTOCOL'] ?? 'http';
     }
-
+    
     public static getInstance(): ExpressProvider {
         if (ExpressProvider.instace === null || ExpressProvider.instace === undefined){
             ExpressProvider.instace = new ExpressProvider();

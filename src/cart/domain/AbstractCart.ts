@@ -4,7 +4,7 @@ export default abstract class AbstractCart {
     protected id: number;
     protected total: number;
     protected lastUpdate: Date;
-    protected products: Map<string, { product: AbstractProduct; amount: number }>;
+    protected products: Map<string, { product: AbstractProduct; quantity: number }>;
 
     constructor (cartInterface: CartInterface){
         this.id = cartInterface.id;
@@ -20,12 +20,12 @@ export default abstract class AbstractCart {
 
     public getLastUpdate = (): Date => this.lastUpdate;
 
-    public getProducts = (): Map<string, { product: AbstractProduct; amount: number }> => this.products;
+    public getProducts = (): Map<string, { product: AbstractProduct; quantity: number }> => this.products;
 }
 
 interface CartInterface {
     id: number;
     total: number;
     lastUpdate: Date;
-    products: Map<string, { product: AbstractProduct; amount: number }>;
+    products: Map<string, { product: AbstractProduct; quantity: number }>;
 } export { CartInterface }

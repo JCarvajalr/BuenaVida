@@ -1,7 +1,6 @@
 import AbstractCategory from "../category/AbstractCategory";
 import AbstractImage from "../image/AbstractImage";
 
-
 export default abstract class AbstractProduct {
     protected id: string;
     protected name: string;

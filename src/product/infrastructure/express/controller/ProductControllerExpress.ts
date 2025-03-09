@@ -6,7 +6,7 @@ import ProductsToJson from './ProductsToJson';
 export default class ProductControllerExpress implements ProductControllerExpressInterface {
   constructor(private readonly productUseCase: ProductUseCasePort) {}
   
-  async getProducts(_req: Request, res: Response): Promise<void> {
+  public async getProducts(_req: Request, res: Response): Promise<void> {
     const products = await this.productUseCase.getProducts();
     const jsonProducts = ProductsToJson.get(products);
     if (jsonProducts.length === 0){
