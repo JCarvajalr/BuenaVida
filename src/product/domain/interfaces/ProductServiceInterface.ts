@@ -1,6 +1,5 @@
 import Product from "../product/Product";
 
-
-export default interface ServiceInterface {
+export default interface ProductServiceInterface {
     retrieveProducts(): Promise<Product[]>;
 }
