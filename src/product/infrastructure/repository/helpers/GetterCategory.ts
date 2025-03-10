@@ -1,4 +1,4 @@
-import MySqlCategoryAccesorInterface from "../../../../sql/domain/repository/MySqlCategoryAccesorInterface";
+import MySqlCategoryAccesorInterface from "../../../../sql/domain/interfaces/MySqlCategoryAccesorInterface";
 import AbstractCategory from "../../../domain/category/AbstractCategory";
 import Category from "../../../domain/category/Category";
 import NullCategory from "../../../domain/category/NullCategory";

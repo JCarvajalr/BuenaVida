@@ -1,5 +1,5 @@
 import MySqlProductInterface from "../../../domain/product/MySqlProductInterface";
-import MySqlProductAccesorInterface from "../../../domain/repository/MySqlProductAccesorInterface";
+import MySqlProductAccesorInterface from "../../../domain/interfaces/MySqlProductAccesorInterface";
 import Database from "../Database";
 
 export default class MySqlProductAccesor implements MySqlProductAccesorInterface{

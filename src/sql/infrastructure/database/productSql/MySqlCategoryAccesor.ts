@@ -1,5 +1,5 @@
 import MySqlCategoryInterface from "../../../domain/product/MySqlCategoryInterface";
-import MySqlCategoryAccesorInterface from "../../../domain/repository/MySqlCategoryAccesorInterface";
+import MySqlCategoryAccesorInterface from "../../../domain/interfaces/MySqlCategoryAccesorInterface";
 import Database from "../Database";
 
 export default class MySqlCategoryAccesor implements MySqlCategoryAccesorInterface {

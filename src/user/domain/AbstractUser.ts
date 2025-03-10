@@ -1,16 +1,16 @@
 export default abstract class AbstractUser {
     protected id: number;
     protected email: string;
-    protected name: string;
-    protected surname: string;
+    protected names: string;
+    protected surnames: string;
     protected password: string;
     protected role: Role;
 
     constructor(userInterface: UserInterface) {
         this.id = userInterface.id;
         this.email = userInterface.email;
-        this.name = userInterface.names;
-        this.surname = userInterface.surnames;
+        this.names = userInterface.names;
+        this.surnames = userInterface.surnames;
         this.password = userInterface.password;
         this.role = userInterface.role;
     }
@@ -21,9 +21,9 @@ export default abstract class AbstractUser {
 
     public getEmail = (): string => this.email;
 
-    public getName = (): string => this.name;
+    public getName = (): string => this.names;
 
-    public getSurname = (): string => this.surname;
+    public getSurname = (): string => this.surnames;
 
     public getPassword = (): string => this.password;
 

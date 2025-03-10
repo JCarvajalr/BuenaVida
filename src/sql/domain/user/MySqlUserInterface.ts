@@ -1,5 +1,6 @@
+import UserRepositoryPort from "../../../user/domain/port/driven/UserRepostoryPort";
 
-export default interface MySqlUserInterface {
+export default interface MySqlUserInterface extends UserRepositoryPort {
     id: string;
     name: string;
     surname: string;

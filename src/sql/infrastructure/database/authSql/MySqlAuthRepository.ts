@@ -1,4 +1,4 @@
-import AuthRepositoryInterface from "../../../domain/repository/AuthRepositoryInterface";
+import AuthRepositoryInterface from "../../../domain/interfaces/MySqlAuthAccesorInterface";
 import MySqlPermissionInterface from "../../../domain/role/MySqlPermissionInterface";
 import MySqlRoleInterface from "../../../domain/role/MySqlRoleInterface";
 import MySqlUserInterface from "../../../domain/user/MySqlUserInterface";
