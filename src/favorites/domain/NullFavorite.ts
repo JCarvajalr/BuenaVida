@@ -4,7 +4,6 @@ export default class NullFavorite extends abstractFavorite {
     constructor() {
         super({
             productsId: [],
-            userId: 0,
         });
     }
 

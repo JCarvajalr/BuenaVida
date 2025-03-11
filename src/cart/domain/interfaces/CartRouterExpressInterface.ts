@@ -2,10 +2,10 @@ import RouterExpressInterface from "../../../express/domain/RouterExpressInterfa
 
 export default interface CartRouterExpressInterface extends RouterExpressInterface {
     getCart(): void;
-    addItem(): boolean;
-    removeItem(): boolean;
+    addItem(): void;
+    removeItem(): void;
     emptyCart(): void;
-    increaseQuantity(): boolean;
-    decreaseQuantity(): boolean;
-    payCart(): boolean;
+    increaseQuantity(): void;
+    decreaseQuantity(): void;
+    payCart(): void;
 }
