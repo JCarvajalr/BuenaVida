@@ -1,4 +1,4 @@
-import Cart from "../../Cart";
+import Cart from "../../cart/Cart";
 
 export default interface CartUseCasePort {
     getCart(): Promise<Cart>;

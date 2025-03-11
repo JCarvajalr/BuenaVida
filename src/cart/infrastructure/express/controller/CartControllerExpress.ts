@@ -6,7 +6,7 @@ import CartToJson from "./CartToJson";
 export default class CartControllerExpress implements CartControllerExpressInterface {
     
     constructor(private readonly cartUseCase: CartUseCasePort) {}
-
+    
     public async getCart(_req: Request, res: Response): Promise<void> {
         const cart = await this.cartUseCase.getCart();
         const jsonProducts = CartToJson.get(cart);
@@ -15,5 +15,24 @@ export default class CartControllerExpress implements CartControllerExpressInter
         // } else {
         res.status(200).json(jsonProducts);
         // }
+    }
+    
+    addItem(req: Request, res: Response): Promise<boolean> {
+        throw new Error('Method not implemented.');
+    }
+    removeItem(req: Request, res: Response): Promise<boolean> {
+        throw new Error('Method not implemented.');
+    }
+    emptyCart(_req: Request, res: Response): Promise<void> {
+        throw new Error('Method not implemented.');
+    }
+    increaseQuantity(req: Request, res: Response): Promise<boolean> {
+        throw new Error('Method not implemented.');
+    }
+    decreaseQuantity(req: Request, res: Response): Promise<boolean> {
+        throw new Error('Method not implemented.');
+    }
+    payCart(req: Request, res: Response): Promise<boolean> {
+        throw new Error('Method not implemented.');
     }
 }

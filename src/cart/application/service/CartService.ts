@@ -1,6 +1,6 @@
-import Cart from "../../domain/Cart";
+import Cart from "../../domain/cart/Cart";
 import CartServiceInterface from "../../domain/interfaces/CartServiceInterface";
-import CartRepositoryPort from "../../domain/port/driven/CartRepositoryPort";
+import CartRepositoryPort from "../../domain/port/driven/DbCartRepositoryPort";
 
 export default class CartService implements CartServiceInterface {
     constructor(private readonly cartRepository: CartRepositoryPort) {}

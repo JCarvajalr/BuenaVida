@@ -1,4 +1,4 @@
-import Cart from "../../domain/Cart";
+import Cart from "../../domain/cart/Cart";
 import CartServiceInterface from "../../domain/interfaces/CartServiceInterface";
 import CartUseCasePort from "../../domain/port/driver/CartUseCasePort";
 
