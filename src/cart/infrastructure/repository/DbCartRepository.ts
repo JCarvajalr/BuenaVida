@@ -11,11 +11,11 @@ export default class DbCartRepository implements DbCartRepositoryPort {
     ) {}
     
     public async get(id: number): Promise<Cart> {
-        const sqlCart = await this.sql.fetchCart(Number(id));
+        const sqlCart = await this.sql.fetchCartItems(Number(id));
         if (!sqlCart) {
             return Promise.resolve(new NullCart());
         }
-        const cart = await this.sqlToCart.get(sqlCart);
+        const cart = await this.sqlToCart.get(sqlCart, id);
         
         return Promise.resolve(cart);
     }
@@ -40,8 +40,9 @@ export default class DbCartRepository implements DbCartRepositoryPort {
         return Promise.resolve(success);
     }
 
-    public async emptyCart(userId: number): Promise<void> {
+    public async emptyCart(userId: number): Promise<boolean> {
         const success = await this.sql.empty(userId);
+        return Promise.resolve(success);
     }
 
     public async payCart(userId: number): Promise<boolean> {

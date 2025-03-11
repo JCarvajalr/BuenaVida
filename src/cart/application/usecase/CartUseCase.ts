@@ -4,21 +4,38 @@ import CartUseCasePort from "../../domain/port/driver/CartUseCasePort";
 
 export default class CartUseCase implements CartUseCasePort {
     constructor(private readonly cartService: CartServiceInterface) {}
-
-    public async getCart(): Promise<Cart> {
-        const cart = await this.cartService.retrieveCart();
-        return cart;
+    
+    public async getCart(userId: number): Promise<Cart> {
+        const cart = await this.cartService.retrieveCart(userId);
+        return Promise.resolve(cart);
     }
 
-    public async addProduct(productId: string): Promise<boolean> {
-        return this.cartService.addProduct(productId);
+    public async addProduct(userId: number, productId: string, quantity: number): Promise<boolean> {
+        const success = await this.cartService.addItem(userId, productId, quantity);
+        return Promise.resolve(success);
     }
 
-    public async deleteProduct(productId: string): Promise<void> {
-        this.cartService.deleteProduct(productId);
+    public async deleteProduct(userId: number, productId: string): Promise<boolean> {
+        const success = await this.cartService.deleteItem(userId, productId);
+        return Promise.resolve(success);
     }
 
-    public async emptyCart(): Promise<void> {
-        this.cartService.deleteAll();
+    public async increaseQuantity(userId: number, productId: string, quantity: number): Promise<boolean> {
+        const success = await this.cartService.increaseQuantity(userId, productId, quantity);
+        return Promise.resolve(success);
+    }
+
+    public async decreaseQuantity(userId: number, productId: string, quantity: number): Promise<boolean> {
+        const success = await this.cartService.decreaseQuantity(userId, productId, quantity);
+        return Promise.resolve(success);
+    }
+
+    public async emptyCart(userId: number): Promise<boolean> {
+        const success = await this.cartService.emptyCart(userId);
+        return Promise.resolve(success);
+    }
+
+    public async payCart(userId: number): Promise<boolean> {
+        throw new Error("Method not implemented.");
     }
 }

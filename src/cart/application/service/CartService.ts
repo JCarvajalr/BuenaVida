@@ -5,21 +5,37 @@ import CartRepositoryPort from "../../domain/port/driven/DbCartRepositoryPort";
 export default class CartService implements CartServiceInterface {
     constructor(private readonly cartRepository: CartRepositoryPort) {}
     
-    public async retrieveCart(): Promise<Cart> {
-        const cart = await this.cartRepository.findAll();
-        let c = cart[0];
-        return c;
+    public async retrieveCart(userId: number): Promise<Cart> {
+        const cart = await this.cartRepository.get(userId);
+        return Promise.resolve(cart);
     }
 
-    public async addProduct(productId: string): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    public async addItem(userId: number, productId: string, quantity: number): Promise<boolean> {
+        const succes = await this.cartRepository.addItem(userId, productId, quantity);
+        return Promise.resolve(succes);
     }
 
-    public async deleteProduct(productId: string): Promise<void> {
-        throw new Error("Method not implemented.");
+    public async deleteItem(userId: number, productId: string): Promise<boolean> {
+        const succes = await this.cartRepository.deleteItem(userId, productId);
+        return Promise.resolve(succes);
     }
-    
-    public async deleteAll(): Promise<void> {
+
+    public async increaseQuantity(userId: number, productId: string, quantity: number): Promise<boolean> {
+        const succes = await this.cartRepository.increaseQuantity(userId, productId, quantity);
+        return Promise.resolve(succes);
+    }
+
+    public async decreaseQuantity(userId: number, productId: string, quantity: number): Promise<boolean> {
+        const succes = await this.cartRepository.decreaseQuantity(userId, productId, quantity);
+        return Promise.resolve(succes);
+    }
+
+    public async emptyCart(userId: number): Promise<boolean> {
+        const succes = await this.cartRepository.emptyCart(userId);
+        return Promise.resolve(succes);
+    }
+
+    public async payCart(userId: number): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
 }

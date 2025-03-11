@@ -73,9 +73,14 @@ export default class MySqlCartAccesor implements MySqlCartAccesorInterface{
         }
     }
 
-    public async empty(userId: number): Promise<void> {
-        const rows = await this.database.executeQuery(
-            `DELETE FROM CartItem WHERE Cart_User_idUser = ?`, [userId]
-        );
+    public async empty(userId: number): Promise<boolean> {
+        try {
+            const rows = await this.database.executeQuery(
+                `DELETE FROM CartItem WHERE Cart_User_idUser = ?`, [userId]
+            );
+            return Promise.resolve(true);
+        } catch (error) {
+            return Promise.resolve(false);
+        }
     }
 }

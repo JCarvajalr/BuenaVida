@@ -7,32 +7,57 @@ export default class CartControllerExpress implements CartControllerExpressInter
     
     constructor(private readonly cartUseCase: CartUseCasePort) {}
     
-    public async getCart(_req: Request, res: Response): Promise<void> {
-        const cart = await this.cartUseCase.getCart();
-        const jsonProducts = CartToJson.get(cart);
-        // if (jsonProducts.length === 0){
-        //     res.status(404).send("Products not found");
-        // } else {
-        res.status(200).json(jsonProducts);
-        // }
+    public async getCart(req: Request, res: Response): Promise<void> {
+        const userId = Number(req.params.userId);
+        const cart = await this.cartUseCase.getCart(userId);
+        if (cart.getProducts().length === 0) {
+            res.status(404).send("Products not found");
+        } else {
+            const jsonProducts = CartToJson.get(cart);
+            res.status(200).json(jsonProducts);
+        }
+    }
+
+    public async addProduct(req: Request, res: Response): Promise<void> {
+        const userId = Number(req.params.userId);
+        const productId = req.params.productId;
+        const quantity = Number(req.params.quantityId);
+        const success = await this.cartUseCase.addProduct(userId, productId, quantity);
+        if (success) {
+            res.status(200).json({ succes: success });
+        } else {
+            res.status(404).json({ succes: success });
+        }
     }
     
-    addItem(req: Request, res: Response): Promise<boolean> {
+    public async removeProduct(req: Request, res: Response): Promise<void> {
+        const userId = Number(req.params.userId);
+        const productId = req.params.productId;
+        const quantity = Number(req.params.quantityId);
+        const success = await this.cartUseCase.deleteProduct(userId, productId);
+        if (success) {
+            res.status(200).json({ succes: success });
+        } else {
+            res.status(404).json({ succes: success });
+        }
+    }
+    public async emptyCart(req: Request, res: Response): Promise<void> {
+        const userId = Number(req.params.userId);
+        const success = await this.cartUseCase.emptyCart(userId);
+        if (success) {
+            res.status(200).json({ succes: success });
+        } else {
+            res.status(404).json({ succes: success });
+        }
         throw new Error('Method not implemented.');
     }
-    removeItem(req: Request, res: Response): Promise<boolean> {
+    increaseQuantity(req: Request, res: Response): Promise<void> {
         throw new Error('Method not implemented.');
     }
-    emptyCart(_req: Request, res: Response): Promise<void> {
+    decreaseQuantity(req: Request, res: Response): Promise<void> {
         throw new Error('Method not implemented.');
     }
-    increaseQuantity(req: Request, res: Response): Promise<boolean> {
-        throw new Error('Method not implemented.');
-    }
-    decreaseQuantity(req: Request, res: Response): Promise<boolean> {
-        throw new Error('Method not implemented.');
-    }
-    payCart(req: Request, res: Response): Promise<boolean> {
+    payCart(req: Request, res: Response): Promise<void> {
         throw new Error('Method not implemented.');
     }
 }

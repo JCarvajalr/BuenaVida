@@ -6,6 +6,6 @@ export default interface CartServiceInterface {
     deleteItem(userId: number, productId: string): Promise<boolean>;
     increaseQuantity(userId: number, productId: string, quantity: number): Promise<boolean>;
     decreaseQuantity(userId: number, productId: string, quantity: number): Promise<boolean>;
-    emptyCart(userId: number): Promise<void>;
+    emptyCart(userId: number): Promise<boolean>;
     payCart(userId: number): Promise<boolean>;
 }

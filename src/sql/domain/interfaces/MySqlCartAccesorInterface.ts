@@ -8,5 +8,5 @@ export default interface MySqlCartAccesorInterface {
     removeItem(userId: number, productId: string): Promise<boolean>;
     increaseItem(userId: number, productId: string, quantity: number): Promise<boolean>;
     decreaseItem(userId: number, productId: string, quantity: number): Promise<boolean>;
-    empty(userId: number): Promise<void>;
+    empty(userId: number): Promise<boolean>;
 }

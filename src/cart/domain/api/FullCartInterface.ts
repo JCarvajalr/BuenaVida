@@ -1,8 +1,7 @@
 import { ProductInterface } from "../../../product/domain/product/AbstractProduct";
+import { CartItemInterface } from "../itemCart/AbstractCartItem";
 
 export default interface FullCartInterface {
     id: number;
-    total: number;
-    lastUpdate: Date;
-    products: Map<string, { product: ProductInterface; amount: number }>;
+    products: CartItemInterface[];
 }
