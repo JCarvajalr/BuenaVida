@@ -6,8 +6,6 @@ export default abstract class AbstractProduct {
     protected name: string;
     protected description: string;
     protected price: number;
-    protected state: boolean;
-    protected stock: number;
     protected image: AbstractImage;
     protected category: AbstractCategory;
 
@@ -16,8 +14,6 @@ export default abstract class AbstractProduct {
         this.name = productInterface.name;
         this.description = productInterface.description;
         this.price = productInterface.price;
-        this.state = productInterface.state;
-        this.stock = productInterface.stock;
         this.image = productInterface.image;
         this.category = productInterface.category;
     }
@@ -31,10 +27,6 @@ export default abstract class AbstractProduct {
     
     public getPrice = (): number => this.price;
     
-    public getState = (): boolean => this.state;
-    
-    public getStock = (): number => this.stock;
-    
     public getImage = (): AbstractImage => this.image;
 
     public getCategory = (): AbstractCategory => this.category;
@@ -45,8 +37,6 @@ interface ProductInterface {
     name: string;
     description: string;
     price: number;
-    state: boolean;
-    stock: number;
     image: AbstractImage;
     category: AbstractCategory;
     // ??

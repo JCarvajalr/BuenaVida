@@ -26,8 +26,6 @@ export default class SqlToProduct {
             name: mySqlProduct.name,
             description: mySqlProduct.description,
             price: mySqlProduct.price,
-            state: mySqlProduct.state,
-            stock: mySqlProduct.stock,
             image: this.getterImage.get(mySqlProduct.image),
             category: await this.getterCategory.get(mySqlProduct.Category_idCategory),
         });

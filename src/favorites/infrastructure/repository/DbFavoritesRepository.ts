@@ -18,6 +18,14 @@ export default class DbFavoritesRepository implements DbFavoritesRepositoryInter
         const favorite = this.sqlToFavorite.get(sqlFavorites);
         return Promise.resolve(favorite);
     }
+    
+    public async findById(userId: number, productId: string): Promise<boolean> {
+        const sqlFavorite = await this.sql.find(userId, productId);
+        if (sqlFavorite === null || sqlFavorite === undefined) {
+            return Promise.resolve(false);
+        }
+        return Promise.resolve(true);
+    }
 
     public async addProduct(userId: number, productId: string): Promise<void> {
         Promise.resolve(await this.sql.addItem(userId, productId))

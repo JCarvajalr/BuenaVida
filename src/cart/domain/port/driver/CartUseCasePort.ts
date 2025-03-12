@@ -1,7 +1,9 @@
+import CartResumeInterface from "../../api/CartResumeInterface";
 import Cart from "../../cart/Cart";
 
 export default interface CartUseCasePort {
     getCart(userId: number): Promise<Cart>;
+    getCartResume(userId: number): Promise<CartResumeInterface>;
     addProduct(userId: number, productId: string, quantity: number): Promise<boolean>;
     deleteProduct(userId: number, productId: string): Promise<boolean>;
     increaseQuantity(userId: number, productId: string, quantity: number): Promise<boolean>;

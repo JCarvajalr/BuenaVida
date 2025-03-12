@@ -13,6 +13,15 @@ export default class MySqlSavoriteAccesor implements MySqlFavoriteAccesorInterfa
             WHERE User_idUser = ?`, [userId]);
         return Promise.resolve(rows);
     }
+
+    public async find(userId: number, productId: string): Promise<MySqlFavoriteInterface> {
+        const rows = await this.database.executeQuery(
+            `SELECT 
+            Product_idProduct 
+            FROM Favorites 
+            WHERE User_idUser = ? AND Product_idProduct = ?`, [userId, productId]);
+        return Promise.resolve(rows[0]);
+    }
     
     public async addItem(userId: number, productId: string): Promise<void> {
         const rows = await this.database.executeQuery(

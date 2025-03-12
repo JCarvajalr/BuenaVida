@@ -12,8 +12,6 @@ export default class MySqlProductAccesor implements MySqlProductAccesorInterface
             name, 
             description, 
             price, 
-            state, 
-            stock, 
             Category_idCategory, 
             image 
             FROM product`
@@ -28,12 +26,10 @@ export default class MySqlProductAccesor implements MySqlProductAccesorInterface
             name, 
             description, 
             price, 
-            state, 
-            stock, 
             Category_idCategory, 
             image 
             FROM product WHERE idProduct = ?`, [id]
         );
-        return rows;
+        return rows[0];
     }
 }

@@ -19,10 +19,16 @@ export default class MySqlCartAccesor implements MySqlCartAccesorInterface{
     public async fetchCartItems(userId: number): Promise<MySqlCartItemInterface[]> {
         const rows = await this.database.executeQuery(
             `SELECT 
-            Product_idProduct,
-            quantity
-            FROM CartItem 
-            WHERE Cart_User_idUser = ?`, [userId]
+            p.idProduct,
+            p.name,
+            p.description,
+            p.price,
+            p.Category_idCategory,
+            p.image,
+            ci.quantity
+            FROM CartItem ci
+            JOIN Product p ON ci.Product_idProduct = p.idProduct
+            WHERE ci.Cart_User_idUser = ?`, [userId]
         );
         return Promise.resolve(rows);
     }

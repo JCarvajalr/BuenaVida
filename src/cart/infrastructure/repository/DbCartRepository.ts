@@ -16,7 +16,6 @@ export default class DbCartRepository implements DbCartRepositoryPort {
             return Promise.resolve(new NullCart());
         }
         const cart = await this.sqlToCart.get(sqlCart, id);
-        
         return Promise.resolve(cart);
     }
     

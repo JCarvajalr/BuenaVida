@@ -6,8 +6,6 @@ export default interface FullProductInterface {
     name: string;
     description: string;
     price: number;
-    state: boolean;
-    stock: number;
     image: ImageInterface;
     category: CategoryInterface;
 }

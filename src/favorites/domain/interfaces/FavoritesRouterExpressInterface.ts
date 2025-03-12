@@ -2,6 +2,7 @@ import RouterExpressInterface from "../../../express/domain/RouterExpressInterfa
 
 export default interface FavoritesRouterExpressInterface extends RouterExpressInterface {
     getFavorites(): void;
+    findProduct(): void;
     addFavorite(): void;
     removeFavorite(): void;
 }

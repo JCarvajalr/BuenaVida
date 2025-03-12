@@ -9,8 +9,6 @@ export default class NullProduct extends AbstractProduct {
             name: "Not found",
             description: "Not found",
             price: 0,
-            state: false,
-            stock: 0,
             image: new NullImage(),
             category: new NullCategory(),
         })

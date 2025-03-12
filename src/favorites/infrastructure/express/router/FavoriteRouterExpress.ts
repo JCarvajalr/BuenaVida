@@ -11,21 +11,27 @@ export default class FavoriteRouterExpress implements FavoritesRouterExpressInte
         this.path = "/favorite";
         this.routes();
     }
-
-    public getFavorites(): void {
-        throw new Error("Method not implemented.");
+    
+    public routes(): void {
+        this.getFavorites();
+        this.findProduct()
+        this.addFavorite();
+        this.removeFavorite();
     }
 
+    public getFavorites(): void {
+        this.router.get("/get/:userId", this.favoriteController.get.bind(this.favoriteController));
+    }
+    
+    public findProduct(): void {
+        this.router.get("/find/:userId/:productId", this.favoriteController.findById.bind(this.favoriteController));
+    }
+    
     public addFavorite(): void {
-        throw new Error("Method not implemented.");
+        this.router.post("/add/:userId/:productId", this.favoriteController.add.bind(this.favoriteController));
     }
 
     public removeFavorite(): void {
-        throw new Error("Method not implemented.");
-    }
-    
-    public routes(): void {
-        throw new Error("Method not implemented.");
-    }
-    
+        this.router.delete("/delete/:userId/:productId", this.favoriteController.remove.bind(this.favoriteController));
+    }   
 }

@@ -18,25 +18,34 @@ export default class FavoriteControllerExpress implements FavoritesControllerExp
         }
     }
     
+    public async findById(req: Request, res: Response): Promise<void> {
+        const userId = Number(req.params.userId);
+        const productId = req.params.productId;
+
+        const found = await this.favoriteUseCase.findById(userId, productId);
+        res.status(200).json(found);
+    }
+    
     public async add(req: Request, res: Response): Promise<void> {
         try {
             const userId = Number(req.params.userId);
             const productId = req.params.productId;
             const favorite = await this.favoriteUseCase.addProduct(userId, productId);
-            res.status(200);
+            res.status(200).send(true);
         } catch (error) {
-            res.status(400).send("Error")
+            res.status(400).send("Error");
         }
     }
 
     public async remove(req: Request, res: Response): Promise<void> {
         try {
+            console.log("aaaaaa");
             const userId = Number(req.params.userId);
             const productId = req.params.productId;
             const favorite = await this.favoriteUseCase.removeProduct(userId, productId);
-            res.status(200);
+            res.status(200).send(true);
         } catch (error) {
-            res.status(400).send("Error")
+            res.status(400).send("Error");
         }
     }
 }

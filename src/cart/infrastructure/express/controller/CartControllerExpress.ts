@@ -8,16 +8,26 @@ export default class CartControllerExpress implements CartControllerExpressInter
     constructor(private readonly cartUseCase: CartUseCasePort) {}
     
     public async getCart(req: Request, res: Response): Promise<void> {
-        const userId = Number(req.params.userId);
+        const userId = Number(req.params.id);
         const cart = await this.cartUseCase.getCart(userId);
-        if (cart.getProducts().length === 0) {
+        if (cart === undefined || cart === null || cart.isNull()) {
             res.status(404).send("Products not found");
         } else {
             const jsonProducts = CartToJson.get(cart);
             res.status(200).json(jsonProducts);
         }
     }
-
+    
+    public async getCartResume(req: Request, res: Response): Promise<void> {
+        const userId = Number(req.params.id);
+        const cartResume = await this.cartUseCase.getCartResume(userId);
+        if (cartResume === undefined || cartResume === null) {
+            res.status(404).send("Products not found");
+        } else {
+            res.status(200).json(cartResume);
+        }
+    }
+    
     public async addProduct(req: Request, res: Response): Promise<void> {
         const userId = Number(req.params.userId);
         const productId = req.params.productId;

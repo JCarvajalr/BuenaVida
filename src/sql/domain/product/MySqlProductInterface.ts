@@ -4,8 +4,6 @@ export default interface MySqlProductInterface {
     name: string;
     description: string;
     price: number;
-    state: boolean;
-    stock: number;
     Category_idCategory: number;
     image: string;
 }

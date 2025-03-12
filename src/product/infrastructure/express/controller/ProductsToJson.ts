@@ -9,8 +9,6 @@ export default class ProductsToJson {
                 name: product.getName(),
                 description: product.getDescription(),
                 price: product.getPrice(),
-                state: product.getState(),
-                stock: product.getStock(),
                 image: {
                     name: product.getImage().getName(),
                     path: product.getImage().getPath(),

@@ -36,11 +36,12 @@ export default class UserService implements UserServicePort {
         if ((id === undefined || id === null) || Object.keys(item).length === 0) {
             return false;
         }
-        const success = await this.userRepository.update(id, item);
-        if (!success) {
-            return false;
-        }
-        return this.getUserById(id);
+        throw new Error("");
+        // const success = await this.userRepository.update(id, item);
+        // if (!success) {
+        //     return false;
+        // }
+        // return this.getUserById(id);
     }
     public deleteUser = async (id: string): Promise<boolean> => {
         if (id === undefined || id === null) {

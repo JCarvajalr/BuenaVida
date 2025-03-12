@@ -1,3 +1,4 @@
+import CartResumeInterface from "../../domain/api/CartResumeInterface";
 import Cart from "../../domain/cart/Cart";
 import CartServiceInterface from "../../domain/interfaces/CartServiceInterface";
 import CartUseCasePort from "../../domain/port/driver/CartUseCasePort";
@@ -8,6 +9,20 @@ export default class CartUseCase implements CartUseCasePort {
     public async getCart(userId: number): Promise<Cart> {
         const cart = await this.cartService.retrieveCart(userId);
         return Promise.resolve(cart);
+    }
+
+    public async getCartResume(userId: number): Promise<CartResumeInterface > {
+        const cart = await this.cartService.retrieveCart(userId);
+        const cartResume: CartResumeInterface = {
+            products: cart.getProducts().map((cartProduct) => {
+                return {
+                    name: cartProduct.getProduct().getName(),
+                    quantity: cartProduct.getQuantity()
+                }
+            }),
+            total: cart.getTotal(),
+        }
+        return cartResume;
     }
 
     public async addProduct(userId: number, productId: string, quantity: number): Promise<boolean> {
