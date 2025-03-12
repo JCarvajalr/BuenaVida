@@ -3,6 +3,7 @@ import ControllerExpressInterface from "../../../express/domain/ControllerExpres
 
 export default interface CartControllerExpressInterface extends ControllerExpressInterface{
     getCart(req: Request, res: Response): Promise<void>;
+    getCartResume(req: Request, res: Response): Promise<void>;
     addProduct(req: Request, res: Response): Promise<void>;
     removeProduct(req: Request, res: Response): Promise<void>;
     emptyCart(req: Request, res: Response): Promise<void>;

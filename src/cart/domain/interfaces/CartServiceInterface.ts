@@ -2,6 +2,7 @@ import Cart from "../cart/Cart";
 
 export default interface CartServiceInterface {
     retrieveCart(userId: number): Promise<Cart>;
+    // retrieveCartResume(userId: number): Promise<Cart>;
     addItem(userId: number, productId: string, quantity: number): Promise<boolean>;
     deleteItem(userId: number, productId: string): Promise<boolean>;
     increaseQuantity(userId: number, productId: string, quantity: number): Promise<boolean>;

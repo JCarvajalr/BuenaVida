@@ -5,7 +5,7 @@ import Product from "../../domain/product/Product";
 export default class ProductService implements ProductServiceInterface {
     constructor(private readonly productRepository: ProductRepositoryPort) {}
     
-    retrieveProducts(): Promise<Product[]> {
+    public retrieveProducts(): Promise<Product[]> {
         return this.productRepository.findAll();
     }
 }

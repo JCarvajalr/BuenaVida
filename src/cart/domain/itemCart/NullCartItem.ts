@@ -6,6 +6,7 @@ export default class NullCartItem extends AbstractCartItem {
         super({
             product: new NullProduct(),
             quantity: 0,
+            subTotal: 0,
         })
     }
 

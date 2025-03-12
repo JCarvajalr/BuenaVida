@@ -5,8 +5,7 @@ export default class NullCart extends AbstractCart {
         super({
             id: 0,
             total: 0,
-            lastUpdate: new Date(0),
-            products: new Map(),
+            products: [],
         });
     }
 
