@@ -5,6 +5,7 @@ export default interface MySqlProductAccesorInterface {
     fetchAllProducts(): Promise<MySqlProductInterface[]>;
     fetchById(id: string): Promise<MySqlProductInterface>;
     fetchByName(search: string): Promise<MySqlProductInterface[]>;
+    getByPage(page: number): Promise<MySqlProductInterface[]>
     getByPrice(min: number, max: number): Promise<MySqlProductInterface[]>;
     getByCategory(categoryId: number): Promise<MySqlProductInterface[]>;
 }

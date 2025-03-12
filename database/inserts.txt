@@ -1,0 +1,37 @@
+INSERT INTO `role` (`idrole`, `name`) VALUES
+(1, 'Administrador'),
+(2, 'Usuario');
+
+
+-- Categories inserts
+INSERT INTO category (name, description) VALUES
+('Alimentos orgánicos', 'Frutas y verduras frescas, cereales integrales, semillas, frutos secos, leches vegetales y productos sin gluten'),
+('Suplementos naturales', 'Vitaminas, minerales, extractos herbales, probióticos y superalimentos en diferentes presentaciones'),
+('Cosmética natural', 'Jabones artesanales, cremas hidratantes, aceites esenciales, champús y acondicionadores elaborados con ingredientes naturales'),
+('Productos para el hogar', 'Detergentes ecológicos, ambientadores naturales y productos de limpieza biodegradables.'),
+('Libros y recursos', 'Guías de alimentación saludable, libros de recetas vegetarianas y veganas, y publicaciones sobre bienestar natural');
+
+
+
+-- Products inserts
+INSERT INTO product (idProduct, name, stock, price, description, state, image, Category_idCategory) VALUES
+('P001', 'Aceite esencial de Clavo', 100, 7.99, 'El aceite esencial de clavo es conocido por sus propiedades antimicrobianas, antimicóticas, antisépticas, antivirales, afrodisíacas y estimulantes.', 1, 'aceite_clavo.jpg', 3),
+('P002', 'Parches de Oro de 24 kt Rejuvenecedores para Contorno de Ojos', 100, 15.50, 'Parches para ojos con efecto rejuvenecedor enriquecidos con oro de 24kt.', 1, 'parches_oro.jpg', 3),
+('P003', 'Parches Iluminadores para el Contorno de Ojos', 100, 15.50, 'Parches iluminadores para el contorno de ojos que hidratan la piel y mejoran su protección.', 1, 'parches_iluminadores.jpg', 3),
+('P004', 'Parches Supertonificantes para Contorno de Ojos', 100, 15.50, 'Parches con efecto tonificante que reducen signos de fatiga y aportan vitalidad.', 1, 'parches_supertonificantes.jpg', 3),
+('P005', '6 Discos Desmaquillantes de Fibra Natural', 100, 10.50, 'Discos de algodón y carbón de bambú para limpieza diaria y exfoliación.', 1, 'discos_desmaquillantes.jpg', 3),
+('P006', 'Aceite anticelulítico de abedul', 100, 22.90, 'Aceite con extracto de hojas de abedul que mejora la circulación y combate la celulitis.', 1, 'aceite_abedul.jpg', 3),
+('P007', 'Aceite antiinflamatorio S.O.S Rescate', 100, 12.45, 'Aceite para tratar pequeñas heridas, quemaduras, golpes y cicatrices.', 1, 'aceite_sos.jpg', 3),
+('P008', 'Aceite Bucal de Coco Orgánico Premium', 100, 9.60, 'Aceite bucal con ingredientes naturales para higiene bucal y aliento fresco.', 1, 'aceite_coco.jpg', 3),
+('P009', 'Aceite corporal blanco siberiano anticelulítico', 100, 6.95, 'Aceite con cera blanca de abeja y aceites naturales para hidratación.', 1, 'aceite_blanco_siberiano.jpg', 3),
+('P010', 'Aceite corporal Body Sculptor', 100, 73.70, 'Aceite que moldea el cuerpo y ayuda a la tonificación de la piel.', 1, 'aceite_body_sculptor.jpg', 3),
+('P011', 'Aceite corporal de almendras dulces', 100, 10.45, 'Aceite neutro para hidratación y nutrición de la piel, apto para todo tipo de piel.', 1, 'aceite_almendras.jpg', 3),
+('P012', 'Aceite corporal de almendras dulces con dosificador 1L', 100, 14.99, 'Aceite neutro para hidratación y nutrición con práctico dosificador.', 1, 'aceite_almendras_1l.jpg', 3),
+('P013', 'Aceite corporal de almendras dulces con dosificador 500ml', 100, 11.55, 'Aceite neutro para hidratación y nutrición en presentación de 500ml.', 1, 'aceite_almendras_500ml.jpg', 3),
+('P014', 'Aceite Corporal de Granada', 100, 22.90, 'Aceite antioxidante intensivo para regeneración celular y mejora de elasticidad.', 1, 'aceite_granada.jpg', 3),
+('P015', 'Aceite Corporal de Rosa Mosqueta', 100, 22.90, 'Aceite para regeneración de la piel y combate de signos de envejecimiento.', 1, 'aceite_rosa_mosqueta.jpg', 3),
+('P016', 'Aceite corporal Embellecedor del Busto', 100, 81.70, 'Aceite para realzar y moldear el busto con hidratación profunda.', 1, 'aceite_busto.jpg', 3),
+('P017', 'Aceite corporal Reafirmante de Tejidos', 100, 60.00, 'Aceite que previene la pérdida de firmeza y reafirma zonas con flacidez.', 1, 'aceite_reafirmante.jpg', 3),
+('P018', 'Aceite corporal Reafirmante del Busto', 100, 81.70, 'Aceite para reafirmar el seno caído e hidratar la piel.', 1, 'aceite_busto_reafirmante.jpg', 3),
+('P019', 'Aceite corporal Reina de Egipto', 100, 57.30, 'Aceite con fragancia exótica que nutre, regenera y combate el envejecimiento cutáneo.', 1, 'aceite_reina_egipto.jpg', 3);
+

@@ -1,0 +1,203 @@
+
+-- - - - -
+DELIMITER $$
+CREATE PROCEDURE GetProductsByPage(
+    IN pageNumber INT
+)
+BEGIN
+    DECLARE offsetValue INT;
+    SET offsetValue = (pageNumber - 1) * 12;
+
+    SELECT idProduct, name, description, price, Category_idCategory, image FROM Product 
+    ORDER BY idProduct ASC  -- Asegura que los productos se devuelvan ordenados
+    LIMIT 12 OFFSET offsetValue;
+END $$
+DELIMITER ;
+-- - - -- --
+DELIMITER $$
+CREATE PROCEDURE DeleteUser(
+    IN p_userId INT
+)
+BEGIN
+    -- Eliminar el carrito del usuario
+    DELETE FROM Cart WHERE User_idUser = p_userId;
+    -- Eliminar el usuario
+    DELETE FROM User WHERE idUser = p_userId;
+END $$
+DELIMITER ;
+-- -- - - -- - 
+DELIMITER $$
+CREATE TRIGGER after_user_insert
+AFTER INSERT ON `User`
+FOR EACH ROW
+BEGIN
+    INSERT INTO `Cart` (`User_idUser`) VALUES (NEW.idUser);
+END $$
+DELIMITER ;
+-- ------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE IncreaseCartItemQuantity(
+    IN p_userId INT,
+    IN p_productId VARCHAR(45),
+    IN p_quantityToAdd INT
+)
+BEGIN
+    DECLARE v_stock INT DEFAULT 0;
+    DECLARE v_currentQuantity INT DEFAULT 0;
+    DECLARE v_success BOOLEAN DEFAULT FALSE;
+
+    -- Obtener stock del producto
+    SELECT stock INTO v_stock FROM Product WHERE idProduct = p_productId;
+
+    -- Obtener cantidad en el carrito
+    SELECT quantity INTO v_currentQuantity 
+    FROM CartItem 
+    WHERE Product_idProduct = p_productId AND Cart_User_idUser = p_userId;
+
+    -- Si no existe en el carrito, poner cantidad en 0
+    IF v_currentQuantity IS NULL THEN
+        SET v_currentQuantity = 0;
+    END IF;
+
+    -- Verificar stock suficiente
+    IF v_stock >= (v_currentQuantity + p_quantityToAdd) THEN
+        -- Si ya está en el carrito, actualizarlo
+        IF v_currentQuantity > 0 THEN
+            UPDATE CartItem 
+            SET quantity = quantity + p_quantityToAdd 
+            WHERE Product_idProduct = p_productId AND Cart_User_idUser = p_userId;
+        ELSE
+            -- Si no está en el carrito, agregarlo
+            INSERT INTO CartItem (Product_idProduct, quantity, Cart_User_idUser) 
+            VALUES (p_productId, p_quantityToAdd, p_userId);
+        END IF;
+
+        -- Marcar éxito
+        SET v_success = TRUE;
+    END IF;
+
+    -- Retornar el éxito
+    SELECT v_success AS success;
+END $$
+DELIMITER ;
+-- -- - -
+DELIMITER $$
+CREATE PROCEDURE AddProductToCart(
+    IN p_userId INT,
+    IN p_productId VARCHAR(45),
+    IN p_quantity INT
+)
+BEGIN
+    DECLARE v_stock INT DEFAULT 0;
+    DECLARE v_state INT DEFAULT 0;
+    DECLARE v_currentQuantity INT DEFAULT 0;
+
+    -- Obtener stock y estado del producto
+    SELECT stock, state INTO v_stock, v_state 
+    FROM Product 
+    WHERE idProduct = p_productId;
+
+    -- Verificar que el producto existe y está activo
+    IF v_state = 1 THEN
+        -- Verificar si el producto ya está en el carrito
+        SELECT quantity INTO v_currentQuantity
+        FROM CartItem
+        WHERE Product_idProduct = p_productId AND Cart_User_idUser = p_userId;
+
+        -- Si ya está en el carrito, aumentar la cantidad
+        IF v_currentQuantity > 0 THEN
+            -- Verificar si hay suficiente stock
+            IF v_stock >= (v_currentQuantity + p_quantity) THEN
+                UPDATE CartItem 
+                SET quantity = quantity + p_quantity
+                WHERE Product_idProduct = p_productId AND Cart_User_idUser = p_userId;
+
+                -- Devolver éxito
+                SELECT 1 AS success;
+            ELSE
+                -- No hay suficiente stock
+                SELECT 0 AS success;
+            END IF;
+        ELSE
+            -- Si no está en el carrito, insertarlo
+            IF v_stock >= p_quantity THEN
+                INSERT INTO CartItem (Product_idProduct, quantity, Cart_User_idUser) 
+                VALUES (p_productId, p_quantity, p_userId);
+
+                -- Devolver éxito
+                SELECT 1 AS success;
+            ELSE
+                -- No hay suficiente stock
+                SELECT 0 AS success;
+            END IF;
+        END IF;
+    ELSE
+        -- Si el producto no está activo
+        SELECT 0 AS success;
+    END IF;
+END $$
+DELIMITER ;
+-- - -- - 
+DELIMITER $$
+CREATE PROCEDURE RemoveCartItem(
+    IN p_userId INT,
+    IN p_productId VARCHAR(45)
+)
+BEGIN
+    DECLARE v_itemExists INT;
+
+    -- Verificar si el producto existe en el carrito
+    SELECT COUNT(*) INTO v_itemExists 
+    FROM CartItem 
+    WHERE Product_idProduct = p_productId AND Cart_User_idUser = p_userId;
+
+    -- Si el producto está en el carrito, eliminarlo
+    IF v_itemExists > 0 THEN
+        DELETE FROM CartItem 
+        WHERE Product_idProduct = p_productId AND Cart_User_idUser = p_userId;
+
+        -- Retornar mensaje de éxito
+        SELECT 1 AS success;
+    ELSE
+        -- Retornar mensaje de error
+        SELECT 0 AS success;
+    END IF;
+END $$
+DELIMITER ;
+-- - - -
+DELIMITER $$
+CREATE PROCEDURE DecreaseCartItemQuantity(
+    IN p_userId INT,
+    IN p_productId VARCHAR(45),
+    IN p_quantityToRemove INT
+)
+BEGIN
+    DECLARE v_currentQuantity INT DEFAULT 0;
+    DECLARE v_success BOOLEAN DEFAULT 0;
+
+    -- Obtener cantidad actual del producto en el carrito
+    SELECT quantity INTO v_currentQuantity 
+    FROM CartItem 
+    WHERE Product_idProduct = p_productId AND Cart_User_idUser = p_userId;
+
+    -- Si el producto está en el carrito
+    IF v_currentQuantity IS NOT NULL THEN
+        -- Si la cantidad a remover es mayor o igual a la cantidad en el carrito, eliminar el producto
+        IF p_quantityToRemove >= v_currentQuantity THEN
+            DELETE FROM CartItem 
+            WHERE Product_idProduct = p_productId AND Cart_User_idUser = p_userId;
+        ELSE
+            -- Si aún queda cantidad, solo actualizar
+            UPDATE CartItem 
+            SET quantity = quantity - p_quantityToRemove
+            WHERE Product_idProduct = p_productId AND Cart_User_idUser = p_userId;
+        END IF;
+
+        -- Marcar éxito
+        SET v_success = 1;
+    END IF;
+
+    -- Retornar el resultado
+    SELECT v_success AS success;
+END $$
+DELIMITER ;

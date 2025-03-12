@@ -4,6 +4,7 @@ import Product from "../../domain/product/Product";
 
 export default class ProductService implements ProductServiceInterface {
     constructor(private readonly productRepository: ProductRepositoryPort) {}
+
     public retrieveProducts(): Promise<Product[]> {
         return this.productRepository.getAllProducts();
     }
@@ -14,6 +15,10 @@ export default class ProductService implements ProductServiceInterface {
 
     public async retrieveProductsByName(search: string): Promise<Product[]> {
         return this.productRepository.getByName(search);
+    }
+
+    public retrieveProductsByPage(page: number): Promise<Product[]> {
+        return this.productRepository.getByPage(page);
     }
     
     public getByPrice(min: number, max: number): Promise<Product[]> {

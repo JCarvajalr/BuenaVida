@@ -22,6 +22,14 @@ export default class ProductUseCase implements ProductUseCasePort {
             return Promise.resolve([]);
         }
     }
+
+    public getByPage(page: number): Promise<Product[]> {
+        if (page < 1) {
+            return Promise.resolve([]);
+        } else {
+            return Promise.resolve(this.productService.retrieveProductsByPage(page));
+        }
+    }
     
     public getByPrice(min: number, max: number): Promise<Product[]> {
         return Promise.resolve(this.productService.getByPrice(min, max));

@@ -6,6 +6,7 @@ export default interface ProductRouterExpressInterface extends RouterExpressInte
      * getProducts
      * getById => (query: id)
      * getByName => (query: search)
+     * getByPage => (query: page)
      * getByPrice => (query: min, max)
      * getByCategory => (query: categoryId)
      */
