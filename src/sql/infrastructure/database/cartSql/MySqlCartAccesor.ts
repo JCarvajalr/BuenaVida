@@ -23,7 +23,7 @@ export default class MySqlCartAccesor implements MySqlCartAccesorInterface{
             p.name,
             p.description,
             p.price,
-            p.Category_idCategory,
+            p.Category_idCategory AS categoryId,
             p.image,
             ci.quantity
             FROM CartItem ci

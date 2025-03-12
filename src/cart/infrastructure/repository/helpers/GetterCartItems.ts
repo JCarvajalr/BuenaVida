@@ -6,7 +6,7 @@ export default class GetterCartItems {
     constructor(private readonly sqlToProduct: SqlToProduct) {}
 
     public async get(sqlCart: MySqlCartItemInterface[]): Promise<CartItem[]> {
-        const cartItems = await Promise.all(sqlCart.map(async (sqlCartItem) => {
+        const cartItems = Promise.all( await sqlCart.map(async (sqlCartItem) => {
             return new CartItem({
                 product: await this.sqlToProduct.get({
                     idProduct: sqlCartItem.productId,

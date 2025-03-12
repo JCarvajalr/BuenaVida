@@ -6,7 +6,7 @@ import GetterCartItems from "./GetterCartItems";
 export default class SqlToCart {
     constructor(private readonly getterCartItems: GetterCartItems) {}
 
-    public async get(sqlCartItems: MySqlCartItemInterface[], cartId: number) {        
+    public async get(sqlCartItems: MySqlCartItemInterface[], cartId: number) {      
         const cartItems = await this.getterCartItems.get(sqlCartItems);
         const cart = new Cart({
             id: cartId,

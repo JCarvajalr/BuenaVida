@@ -15,7 +15,9 @@ export default abstract class AbstractCartItem {
 
     public getProduct = (): AbstractProduct => this.product;
 
-    public getQuantity = (): number => this.quantity
+    public getQuantity = (): number => this.quantity;
+
+    public getSubTotal = (): number => this.subTotal;
 }
 
 interface CartItemInterface {

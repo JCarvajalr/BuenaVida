@@ -13,38 +13,22 @@ export default class CartRouterExpress implements CartRouterExpressInterface {
     }
 
     public routes(): void {
-        
-        throw new Error("Method not implemented.");
-    }
+        //getCart
+        this.router.get("/get", this.cartController.getCart.bind(this.cartController));
+        //getCartResume
+        this.router.get("/getresume", this.cartController.getCartResume.bind(this.cartController));
+        //addItem
+        this.router.post("/add", this.cartController.addProduct.bind(this.cartController));
+        //removeItem
+        this.router.delete("/remove", this.cartController.removeProduct.bind(this.cartController));
+        //emptyCart
+        this.router.delete("/empty", this.cartController.emptyCart.bind(this.cartController));
+        //increaseQuantity
+        this.router.post("/increase-quantity", this.cartController.increaseQuantity.bind(this.cartController));
+        //decreaseQuantity
+        this.router.post("/decrease-quantity", this.cartController.decreaseQuantity.bind(this.cartController));
+        //payCart
+        // this.router.put("/increase-quantity", this.cartController.increaseQuantity.bind(this.cartController));
 
-    getCart(): void {
-        this.router.get("/get/:id", this.cartController.getCart.bind(this.cartController));
     }
-
-    getCartResume(): void {
-        // this.router.get("/get", this.cartController.getCart.bind(this.cartController));
-    }
-
-    addItem(): void {
-        this.router.get("/add/:id", this.cartController.addProduct.bind(this.cartController));
-    }
-
-    removeItem(): void {
-        this.router.get("/remove/:id", this.cartController.removeProduct.bind(this.cartController));
-    }
-
-    emptyCart(): void {
-        this.router.get("/empty", this.cartController.emptyCart.bind(this.cartController));
-    }
-
-    increaseQuantity(): void {
-        throw new Error("Method not implemented.");
-    }
-    decreaseQuantity(): void {
-        throw new Error("Method not implemented.");
-    }
-    payCart(): void {
-        throw new Error("Method not implemented.");
-    }
-
 }

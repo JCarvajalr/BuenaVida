@@ -7,7 +7,7 @@ export default class GetterCategory {
     constructor(private readonly sql: MySqlCategoryAccesorInterface) {}
     
     public async get(id: number): Promise<Category> {
-        if (id === 0) {
+        if (!id) {
             return new NullCategory();
         }
         const sqlCategory = await this.sql.fetchById(id);

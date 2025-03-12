@@ -1,7 +1,7 @@
-import { ProductInterface } from "../../../product/domain/product/AbstractProduct";
+import FullProductInterface from "../../../product/domain/api/FullProductInterface";
 
 export default interface FullCartItemInterface {
-    product: ProductInterface;
+    product: FullProductInterface;
     quantity: number;
     subTotal: number;
 }
