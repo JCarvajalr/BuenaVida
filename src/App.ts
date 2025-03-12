@@ -6,9 +6,9 @@ import UserRouterFactory from "./user/infrastructure/factory/UserRouterFactory";
 
 const productRouter = ProductRouterFactory.create();
 const cartRouter = CartRouterExpressFactory.create();
-// const userRouter = UserRouterFactory.create();
 const favoriteRouter = FavoriteRouterFactory.create();
-const routers = [productRouter, cartRouter, favoriteRouter];
+const userRouter = UserRouterFactory.create();
+const routers = [productRouter, cartRouter, favoriteRouter, userRouter];
 
 const server = ServerFactory.create(routers);
 server.start();

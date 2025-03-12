@@ -4,32 +4,37 @@ import { RegisterUserInterface } from "../../domain/auth/AbstractRegisterUser"
 import UserRepositoryPort from "../../domain/port/driven/UserRepostoryPort"
 
 export default class UserRepository implements UserRepositoryPort {
-    constructor(private readonly sqlUserAccesor: MySqlUserAccesor) {
-    }
-    async create(user: RegisterUserInterface): Promise<UserInterface | null> {
-        return await this.sqlUserAccesor.create(user)
-    }
-    async findByEmail(email: string): Promise<UserInterface> {
-        return await this.sqlUserAccesor.findByEmail(email)
-    }
-    async findAll(): Promise<UserInterface[]> {
-        return await this.sqlUserAccesor.findAll()
-    };
+    constructor(private readonly sqlUserAccesor: MySqlUserAccesor) {}
 
-    async findById(id: string): Promise<UserInterface> {
-        return await this.sqlUserAccesor.findById(id)
+    public async create(user: RegisterUserInterface): Promise<UserInterface | null> {
+        return await this.sqlUserAccesor.create(user);
     }
-    async update(id: string, item: Partial<UserInterface>): Promise<UserInterface | boolean> {
-        return await this.sqlUserAccesor.update(id, item)
+    
+    public async findByEmail(email: string): Promise<UserInterface> {
+        return await this.sqlUserAccesor.findByEmail(email);
     }
-    async delete(id: string): Promise<boolean> {
-        return await this.sqlUserAccesor.delete(id)
+
+    public async findAll(): Promise<UserInterface[]> {
+        return await this.sqlUserAccesor.findAll();
     }
-    save = (_item: UserInterface) => {
-        throw new Error("Method not implemented.")
+
+    public async findById(id: string): Promise<UserInterface> {
+        return await this.sqlUserAccesor.findById(id);
     }
-        ;
-    patch = (_id: string, _item: Partial<UserInterface>) => {
-        throw new Error("Method not implemented.")
+
+    public async update(id: string, item: Partial<UserInterface>): Promise<UserInterface | boolean> {
+        return await this.sqlUserAccesor.update(id, item);
+    }
+
+    public async delete(id: string): Promise<boolean> {
+        return await this.sqlUserAccesor.delete(id);
+    }
+
+    public save = (_item: UserInterface) => {
+        throw new Error("Method not implemented.");
+    }
+
+    public patch = (_id: string, _item: Partial<UserInterface>) => {
+        throw new Error("Method not implemented.");
     }
 }

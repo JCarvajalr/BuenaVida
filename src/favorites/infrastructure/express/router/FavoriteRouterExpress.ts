@@ -18,7 +18,7 @@ export default class FavoriteRouterExpress implements FavoritesRouterExpressInte
         this.addFavorite();
         this.removeFavorite();
     }
-
+    
     public getFavorites(): void {
         this.router.get("/get/:userId", this.favoriteController.get.bind(this.favoriteController));
     }

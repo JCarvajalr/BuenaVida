@@ -7,19 +7,11 @@ export default class MySqlUserAccesor implements MySqlUserAccesorInterface {
     private readonly database = Database.getInstance();
 
     public async create(user: RegisterUserInterface): Promise<UserInterface | null> {
-        const query = `
-            INSERT INTO buenavidaparcial.users (names, surnames, email, password, role) 
-            VALUES (?, ?, ?, ?, ?);
-        `;
-        const values = [
-            user.names,
-            user.surnames,
-            user.email,
-            user.password,
-            user.role,
-        ];
-        Database.getInstance();
-        const result = await this.database.executeQuery(query, values);
+        const result = await this.database.executeQuery(
+            `INSERT INTO user (name, surnames, email, password, role_idrole) 
+            VALUES (?, ?, ?, ?, ?)`, 
+            [user.names, user.surnames, user.email, user.password, user.role,]
+        );
 
         if (result.affectedRows > 0) {
             return {...user, id: result.insertId};
@@ -28,43 +20,56 @@ export default class MySqlUserAccesor implements MySqlUserAccesorInterface {
     }
 
     public async findByEmail(email: string): Promise<UserInterface> {
-        const query = 'SELECT * FROM buenavidaparcial.users WHERE email = ?;';
-        let res = await this.database.executeQuery(query, [email]);
-        res = res[0]
-        return res
+        const user = await this.database.executeQuery(
+            `SELECT * FROM user WHERE email = ?`, [email]
+        );
+        return user[0];
     }
 
     public async findAll(): Promise<UserInterface[]> {
-        const query = 'SELECT * FROM buenavidaparcial.users;';
-        return await this.database.executeQuery(query);
-    };
-    public async findById(id: string): Promise<UserInterface> {
-        const query = 'SELECT * FROM buenavidaparcial.users WHERE id = ?;';
-        let res = await this.database.executeQuery(query, [id]);
-        res = res[0]
-        return res;
+        const users = await this.database.executeQuery(
+            `SELECT 
+            idUser AS id,
+            name AS names,
+            surnames,
+            email,
+            password,
+            role_idRole AS role 
+            FROM user`
+        );
+        return users;
     }
+
+    public async findById(id: string): Promise<UserInterface> {
+        const user = await this.database.executeQuery(
+            `SELECT * FROM user WHERE idUser = ?`, [id]
+        );
+        return user[0];
+    }
+
     public async update(id: string, item: Partial<UserInterface>): Promise<boolean | UserInterface> {
         const fields = Object.keys(item).map(field => `${field} = ?`).join(', ');
         const values = Object.values(item);
         if (fields.length === 0) {
             return false;
         }
-        const query = `UPDATE buenavidaparcial.users SET ${fields} WHERE id = ?;`;
+        const query = `UPDATE user SET ${fields} WHERE idUser = ?`;
         const result = await this.database.executeQuery(query, [...values, id]);
 
         return result.affectedRows > 0;
     }
 
     public async delete(id: string): Promise<boolean> {
-        const query = 'DELETE FROM buenavidaparcial.users WHERE id = ?;';
-        const result = await this.database.executeQuery(query, [id]);
-        return result.affectedRows > 0;
+        const success = await this.database.executeQuery(
+            `CALL DeleteUser(?)`, [id]
+        );
+        return success.affectedRows > 0;
     }
+
     save = (_item: UserInterface) => {
         throw new Error("Method not implemented.")
     }
-        ;
+
     patch = (_id: string, _item: Partial<UserInterface>) => {
         throw new Error("Method not implemented.")
     }

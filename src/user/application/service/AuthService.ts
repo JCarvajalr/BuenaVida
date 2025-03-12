@@ -7,26 +7,27 @@ import User from "../../domain/User";
 import GetterUser from "../helpers/GetterUser";
 
 export default class AuthService implements AuthServicePort {
-    constructor(private readonly authRepository: AuthRepositoryPort,
-        private readonly userRepository: UserRepositoryPort) { }
+    constructor(
+        private readonly authRepository: AuthRepositoryPort, 
+        private readonly userRepository: UserRepositoryPort) {}
 
     public login = async (email: string, password: string): Promise<User> => {
-        const userData = await this.userRepository.findByEmail(email)
-        if (userData === undefined || userData === null) {
+        const userData = await this.userRepository.findByEmail(email);
+        if (!userData) {
             return Promise.resolve(new NullUser());
         }
-        const user: User = GetterUser.get(userData)
-        const isPasswordCorrect: boolean = await this.authRepository.comparePasswords(password, user.getPassword())
+        const user = GetterUser.get(userData);
+        const isPasswordCorrect = await this.authRepository.comparePasswords(password, user.getPassword());
         if (!isPasswordCorrect) {
             return Promise.resolve(new NullUser());
         }
         return Promise.resolve(user);
-    };
+    }
+
     public register = async (user: RegisterUserInterface): Promise<User> => {
         if (user === undefined || user === null) {
             return new NullUser();
         }
-        // hash
         const hashedPassword: string = await this.authRepository.hashPassword(user.password);
 
         const newUser = ({
@@ -35,15 +36,13 @@ export default class AuthService implements AuthServicePort {
         });
 
         const savedUser = await this.userRepository.create(newUser);
-        if (savedUser === undefined || savedUser === null) {
+        if (!savedUser) {
             return new NullUser();
         }
         return GetterUser.get(savedUser);
-    };
+    }
 
     logout(_user: User): Promise<void> {
         throw new Error("Method not implemented.");
     }
 }
-
-

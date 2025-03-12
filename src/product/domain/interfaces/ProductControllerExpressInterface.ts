@@ -3,4 +3,8 @@ import ControllerExpressInterface from "../../../express/domain/ControllerExpres
 
 export default interface ProductControllerExpressInterface extends ControllerExpressInterface{
     getProducts(_req: Request, res: Response): Promise<void>;
+    getById(req: Request, res: Response): Promise<void>;
+    getByName(req: Request, res: Response): Promise<void>;
+    getByPrice(req: Request, res: Response): Promise<void>;
+    getByCategory(req: Request, res: Response): Promise<void>;
 }

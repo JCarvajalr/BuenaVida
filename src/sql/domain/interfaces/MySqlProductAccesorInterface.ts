@@ -4,4 +4,7 @@ import MySqlProductInterface from "../product/MySqlProductInterface";
 export default interface MySqlProductAccesorInterface {
     fetchAllProducts(): Promise<MySqlProductInterface[]>;
     fetchById(id: string): Promise<MySqlProductInterface>;
+    fetchByName(search: string): Promise<MySqlProductInterface[]>;
+    getByPrice(min: number, max: number): Promise<MySqlProductInterface[]>;
+    getByCategory(categoryId: number): Promise<MySqlProductInterface[]>;
 }

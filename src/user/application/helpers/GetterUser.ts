@@ -3,7 +3,7 @@ import User from "../../domain/User";
 
 export default class GetterUser {
     public static get = (json: UserInterface): User => {
-        return new User({
+        const user = new User({
             id: json.id,
             names: json.names,
             surnames: json.surnames,
@@ -11,5 +11,6 @@ export default class GetterUser {
             password: json.password,
             role: json.role,
         });
+        return user;
     }
 }

@@ -39,7 +39,6 @@ export default class FavoriteControllerExpress implements FavoritesControllerExp
 
     public async remove(req: Request, res: Response): Promise<void> {
         try {
-            console.log("aaaaaa");
             const userId = Number(req.params.userId);
             const productId = req.params.productId;
             const favorite = await this.favoriteUseCase.removeProduct(userId, productId);

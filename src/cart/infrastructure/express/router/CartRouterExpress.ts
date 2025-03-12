@@ -13,19 +13,19 @@ export default class CartRouterExpress implements CartRouterExpressInterface {
     }
 
     public routes(): void {
-        //getCart
+        //getCart (body: userId)
         this.router.get("/get", this.cartController.getCart.bind(this.cartController));
-        //getCartResume
+        //getCartResume (body: userId)
         this.router.get("/getresume", this.cartController.getCartResume.bind(this.cartController));
-        //addItem
+        //addItem (body: userId, productId, quantity)
         this.router.post("/add", this.cartController.addProduct.bind(this.cartController));
-        //removeItem
+        //removeItem (body: userId, productId)
         this.router.delete("/remove", this.cartController.removeProduct.bind(this.cartController));
-        //emptyCart
+        //emptyCart (body: userId)
         this.router.delete("/empty", this.cartController.emptyCart.bind(this.cartController));
-        //increaseQuantity
+        //increaseQuantity (body: userId, productId, quantity)
         this.router.post("/increase-quantity", this.cartController.increaseQuantity.bind(this.cartController));
-        //decreaseQuantity
+        //decreaseQuantity (body: userId, productId, quantity)
         this.router.post("/decrease-quantity", this.cartController.decreaseQuantity.bind(this.cartController));
         //payCart
         // this.router.put("/increase-quantity", this.cartController.increaseQuantity.bind(this.cartController));

@@ -6,29 +6,29 @@ import AuthUseCasePort from "../../domain/port/driver/usecase/AuthUseCase";
 import User from "../../domain/User";
 
 export default class AuthUseCase implements AuthUseCasePort {
-    constructor(private readonly authService: AuthServicePort,
-        private readonly jwtService: JWTInterface) {}
-    async login(email: string, password: string): Promise<{ user: User; token: string }> {
-
-        if ((email === undefined || email === null) || (password === undefined || password === null)) {
+    constructor(
+        private readonly authService: AuthServicePort,
+        private readonly jwtService: JWTInterface
+    ) {}
+    
+    public async login(email: string, password: string): Promise<{ user: User; token: string }> {
+        if (!email || !password) {
             return { user: new NullUser(), token: "" };
         }
-
         const user: User = await this.authService.login(email, password);
-
         if (user.isNull()) {
             return { user: new NullUser(), token: "" };
         }
-
         const token = this.jwtService.generateToken({ id: user.getId() });
-
         return { user, token };
     }
-    async register(user: RegisterUserInterface): Promise<User> {
-        if ((user === undefined || user === null)) return new NullUser();
+
+    public async register(user: RegisterUserInterface): Promise<User> {
+        if (!user) return new NullUser();
         return await this.authService.register(user)
     }
-    logout(_user: User): Promise<void> {
+
+    public logout(_user: User): Promise<void> {
         throw new Error("Method not implemented.")
     }
 }
