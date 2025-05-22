@@ -16,7 +16,9 @@ export default class AuthService implements AuthServicePort {
         if (!userData) {
             return Promise.resolve(new NullUser());
         }
+        console.log(userData);
         const user = GetterUser.get(userData);
+        console.log(user);
         const isPasswordCorrect = await this.authRepository.comparePasswords(password, user.getPassword());
         if (!isPasswordCorrect) {
             return Promise.resolve(new NullUser());

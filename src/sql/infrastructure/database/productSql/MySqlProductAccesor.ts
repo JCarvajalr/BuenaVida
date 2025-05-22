@@ -34,6 +34,12 @@ export default class MySqlProductAccesor implements MySqlProductAccesorInterface
         return rows[0];
     }
 
+    public async getPageCount(): Promise<number> {
+        const rows = await this.database.executeQuery(
+            `SELECT CEIL(COUNT(*) / 12) AS totalPages FROM Product` );
+        return rows[0];
+    }
+
     public async getByPrice(min: number, max: number): Promise<MySqlProductInterface[]> {
         const rows = await this.database.executeQuery(
             `SELECT ${this.productSelect} FROM Product 

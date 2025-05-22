@@ -9,10 +9,10 @@ export default class MySqlUserAccesor implements MySqlUserAccesorInterface {
     public async create(user: RegisterUserInterface): Promise<UserInterface | null> {
         const result = await this.database.executeQuery(
             `INSERT INTO user (name, surnames, email, password, role_idrole) 
-            VALUES (?, ?, ?, ?, ?)`, 
-            [user.names, user.surnames, user.email, user.password, user.role,]
+            VALUES ("${user.names}", "${user.surnames}", "${user.email}", "${user.password}", "${user.role}")`
+            // [user.names, user.surnames, user.email, user.password, user.role,]
         );
-
+        
         if (result.affectedRows > 0) {
             return {...user, id: result.insertId};
         }

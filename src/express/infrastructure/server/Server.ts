@@ -1,6 +1,7 @@
 import express, { Application } from 'express'
 import RouterExpressInterface from '../../domain/RouterExpressInterface';
 import ExpressProvider from '../provider/ExpressProvider';
+import cors from 'cors'
 
 export default class Server {
     private readonly app: Application
@@ -10,7 +11,8 @@ export default class Server {
     ) {
         this.app = express();
         this.configure();
-        this.routes()
+        this.middlewares();
+        this.routes();
     }
 
     public routes() {
@@ -23,6 +25,16 @@ export default class Server {
     public configure() {
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
+    }
+
+    private middlewares(): void {
+        this.app.use(cors({
+            origin: 'http://127.0.0.1:5501',
+            methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+            allowedHeaders: ['Content-Type'],
+            credentials: true
+        }));
+        this.app.options('*', cors()); 
     }
 
     public start() {

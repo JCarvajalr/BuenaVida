@@ -30,6 +30,10 @@ export default class ProductUseCase implements ProductUseCasePort {
             return Promise.resolve(this.productService.retrieveProductsByPage(page));
         }
     }
+
+    public getPageCount(): Promise<number> {
+        return Promise.resolve(this.productService.getPageCount());
+    }
     
     public getByPrice(min: number, max: number): Promise<Product[]> {
         return Promise.resolve(this.productService.getByPrice(min, max));

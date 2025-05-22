@@ -6,6 +6,7 @@ export default interface DbProductRepositoryPort {
     getById(proudctId: string): Promise<Product>;
     getByName(search: string): Promise<Product[]>;
     getByPage(page: number): Promise<Product[]>;
+    getPageCount(): Promise<number>;
     getByPrice(min: number, max: number): Promise<Product[]>;
     getByCategory(categoryId: number): Promise<Product[]>;
 }

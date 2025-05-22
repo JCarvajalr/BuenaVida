@@ -20,6 +20,10 @@ export default class ProductService implements ProductServiceInterface {
     public retrieveProductsByPage(page: number): Promise<Product[]> {
         return this.productRepository.getByPage(page);
     }
+
+    public getPageCount(): Promise<number> {
+        return this.productRepository.getPageCount();
+    }
     
     public getByPrice(min: number, max: number): Promise<Product[]> {
         return this.productRepository.getByPrice(min, max);

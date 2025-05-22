@@ -49,6 +49,11 @@ export default class DbProductRepository implements DbProductRepositoryPort {
         return Promise.resolve(products);
     }
 
+    public async getPageCount(): Promise<number> {
+        const count = await this.sql.getPageCount();
+        return count;
+    }
+
     public async getByPrice(min: number, max: number): Promise<Product[]> {
         const sqlProducts = await this.sql.getByPrice(min, max);
         if (!sqlProducts) {

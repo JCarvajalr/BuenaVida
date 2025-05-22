@@ -39,10 +39,14 @@ export default class ProductControllerExpress implements ProductControllerExpres
   }
 
   public async getByPage(req: Request, res: Response): Promise<void> {
-      const { page } = req.query;
-      const products = await this.productUseCase.getByPage(Number(page));
-      const jsonProducts = ProductsToJson.get(products);
-      res.status(200).json(jsonProducts);
+    const { page } = req.query;
+    const products = await this.productUseCase.getByPage(Number(page));
+    const jsonProducts = ProductsToJson.get(products);
+    res.status(200).json(jsonProducts);
+  }
+  public async getPageCount(req: Request, res: Response): Promise<void> {
+    const count = await this.productUseCase.getPageCount();
+    res.status(200).json(count);
   }
 
   public async getByPrice(req: Request, res: Response): Promise<void> {

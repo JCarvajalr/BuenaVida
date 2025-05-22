@@ -5,6 +5,7 @@ export default interface ProductUseCasePort {
     getById(productId: string): Promise<Product>;
     getByName(search: string): Promise<Product[]>;
     getByPage(page: number): Promise<Product[]>
+    getPageCount(): Promise<number>
     getByPrice(min: number, max: number): Promise<Product[]>;
     getByCategory(categoryId: number): Promise<Product[]>;
 }

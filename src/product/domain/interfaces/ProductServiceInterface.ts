@@ -5,6 +5,7 @@ export default interface ProductServiceInterface {
     retriveProductById(productId: string): Promise<Product>;
     retrieveProductsByName(search: string): Promise<Product[]>;
     retrieveProductsByPage(page: number): Promise<Product[]>;
+    getPageCount(): Promise<number>;
     getByPrice(min: number, max: number): Promise<Product[]>;
     getByCategory(categoryId: number): Promise<Product[]>;
 }

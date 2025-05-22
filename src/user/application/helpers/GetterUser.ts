@@ -2,9 +2,9 @@ import { UserInterface } from "../../domain/AbstractUser";
 import User from "../../domain/User";
 
 export default class GetterUser {
-    public static get = (json: UserInterface): User => {
+    public static get = (json: any): User => {
         const user = new User({
-            id: json.id,
+            id: json.idUser,
             names: json.names,
             surnames: json.surnames,
             email: json.email,

@@ -25,6 +25,8 @@ export default class ProductRouterExpress implements ProductRouterExpressInterfa
         this.router.get("/search", this.productController.getByName.bind(this.productController));
         // getByPage (query: page)
         this.router.get("/page", this.productController.getByPage.bind(this.productController));
+        // getPageCount ()
+        this.router.get("/page-count", this.productController.getPageCount.bind(this.productController));
         // getByPrice (query: min, max)
         this.router.get("/price", this.productController.getByPrice.bind(this.productController));
         // getByCategory (query: categoryId)
